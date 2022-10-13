@@ -60,6 +60,14 @@ function createProductElements(product) {
   addToCartBtn.innerHTML = 'Lägg till i kundvagnen';
   addToCartBtn.classList.add('add-to-cart-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
+  addToCartBtn.addEventListener('click', () => {
+    console.log(`Tryck på knapp: ${addToCartBtn.id}`);
+    //Istället för console.log vill vi anropa function addToCart()
+    // Uppdatera varukorgen i header
+    // Spara våra produktklick i en array
+    // Spara till localStorage
+    // Om produkten redan finns - öka antalet ananrs lägg till.
+  });
 
   productWrapper.append(
     productTitle,
