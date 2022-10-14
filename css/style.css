@@ -16,7 +16,6 @@ body {
 header {
   position: fixed;
   top: 0;
-  left: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +25,16 @@ header {
   padding: 0 1rem;
   color: var(--white);
   font-size: 1.8rem;
+}
+
+header a,
+.icon {
+  text-decoration: none;
+}
+
+header h1,
+.icon {
+  color: var(--white);
 }
 
 main {
