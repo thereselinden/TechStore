@@ -45,6 +45,9 @@ function createProductElements(product) {
   const productWrapper = document.createElement('article');
   productWrapper.classList.add('product-wrapper');
 
+  const productCard = document.createElement('div');
+  productCard.classList.add('product-card');
+
   const productTitle = document.createElement('h2');
   productTitle.classList.add('product-title');
   productTitle.innerHTML = product.title;
@@ -70,12 +73,22 @@ function createProductElements(product) {
   });
 
   productWrapper.append(
+    productCard
+    // productTitle,
+    // productDescription,
+    // productImage,
+    // productPrice,
+    // addToCartBtn
+  );
+
+  productCard.append(
     productTitle,
     productDescription,
     productImage,
     productPrice,
     addToCartBtn
   );
+
   productContainer.appendChild(productWrapper);
 }
 
