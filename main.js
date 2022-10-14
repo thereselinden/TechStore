@@ -1,6 +1,3 @@
-const productContainer = document.querySelector('#productContainer');
-console.log(productContainer);
-
 var listOfProducts;
 
 /** Get products from the json file and store it in a gobal variable */
@@ -17,8 +14,14 @@ function loadProducts() {
 
 function initSite() {
   loadProducts();
+  renderNumberOfCartItems();
   // This would also be a good place to initialize other parts of the UI
 }
+
+function initLS() {
+  //saveLS();
+}
+initLS();
 
 /** Uses the loaded products data to create a visible product list on the website */
 function addProductsToWebpage() {
@@ -37,6 +40,8 @@ function addProductsToWebpage() {
 }
 
 function createProductElements(product) {
+  const productContainer = document.querySelector('#productContainer');
+
   const productWrapper = document.createElement('article');
   productWrapper.classList.add('product-wrapper');
 
@@ -61,12 +66,7 @@ function createProductElements(product) {
   addToCartBtn.classList.add('add-to-cart-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
   addToCartBtn.addEventListener('click', () => {
-    console.log(`Tryck på knapp: ${addToCartBtn.id}`);
-    //Istället för console.log vill vi anropa function addToCart()
-    // Uppdatera varukorgen i header
-    // Spara våra produktklick i en array
-    // Spara till localStorage
-    // Om produkten redan finns - öka antalet ananrs lägg till.
+    addToCart(addToCartBtn.id);
   });
 
   productWrapper.append(
@@ -77,4 +77,44 @@ function createProductElements(product) {
     addToCartBtn
   );
   productContainer.appendChild(productWrapper);
+}
+
+function addToCart(productId) {
+  //HÄMTA FRÅN LOCALSTORAGE
+  let shoppingCart = getShoppingCartFromLS() || []; //sättas i LocalStorage
+
+  if (
+    shoppingCart.some(
+      product => product.title.replace(/\s+/g, '') === productId
+    )
+  ) {
+    alert('Produkten redan tillagd');
+    //ändras när vi har kommit längre. T ex rendera ut + och 1 på varukorgssidan för att minska eller öka antalet produkter
+    // Om produkten redan finns - öka antalet ananrs lägg till.
+  } else {
+    let productObj = listOfProducts.find(
+      product => product.title.replace(/\s+/g, '') == productId
+    );
+
+    shoppingCart.push(productObj);
+  }
+
+  saveLS(shoppingCart);
+  renderNumberOfCartItems();
+  // Spara till localStorage
+}
+
+function renderNumberOfCartItems() {
+  const numberOfItemsInCart = document.querySelector('#numberOfItemsInCart');
+  const productsInShoppingCart = getShoppingCartFromLS() || [];
+
+  numberOfItemsInCart.innerHTML = productsInShoppingCart.length;
+}
+
+function saveLS(shoppingCart) {
+  localStorage.setItem('cart', JSON.stringify(shoppingCart));
+}
+
+function getShoppingCartFromLS() {
+  return JSON.parse(localStorage.getItem('cart'));
 }
