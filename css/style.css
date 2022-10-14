@@ -57,6 +57,10 @@ main {
   margin-bottom: 0.3rem;
 }
 
+.product-wrapper:nth-child(odd) {
+  background-color: var(--lightGrey);
+}
+
 .product-card .product-description,
 .product-card .product-price {
   font-weight: bold;
