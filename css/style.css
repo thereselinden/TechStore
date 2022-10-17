@@ -104,3 +104,17 @@ main {
     margin: 0;
   }
 }
+
+.add-to-cart-btn {
+  background-color: cornflowerblue;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.15rem;
+}
+
+.add-to-cart-btn i {
+  margin-right: 8px;
+  font-size: 0.9rem;
+}

@@ -65,7 +65,7 @@ function createProductElements(product) {
   productPrice.innerHTML = `${product.price} kr`;
 
   const addToCartBtn = document.createElement('button');
-  addToCartBtn.innerHTML = 'Lägg till i kundvagnen';
+  addToCartBtn.innerHTML = '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen';
   addToCartBtn.classList.add('add-to-cart-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
   addToCartBtn.addEventListener('click', () => {
