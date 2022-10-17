@@ -112,6 +112,17 @@ main {
 .remove-btn {
   background-color: var(--red);
 }
+
+.cart-title-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-title-wrapper i {
+  color: var(--darkest);
+  margin-right: 0.6rem;
+}
 /**** MEDIA QUERIES TABLET ****/
 @media (min-width: 768px) {
   header {

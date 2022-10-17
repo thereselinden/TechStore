@@ -42,6 +42,12 @@ function addProductsToWebpage() {
 function addCartItemsToWebpage() {
   const cartContainer = document.getElementById('cartContainer');
   cartContainer.innerHTML = '';
+
+  cartContainer.innerHTML = `
+  <div class="cart-title-wrapper">
+    <i class="fa-solid fa-cart-shopping icon"></i>
+    <h1>Kundvagn</h1>
+  </div>`;
   // Check your console to see that the products are stored in the listOfProducts varible.
   const cart = getShoppingCartFromLS();
 
@@ -49,6 +55,9 @@ function addCartItemsToWebpage() {
     console.log(product);
     createCartItems(product);
   });
+
+  cartContainer.appendChild(renderTotalPrice());
+  cartContainer.appendChild(renderPurchaseButton());
 }
 
 function createProductElements(product) {
@@ -200,4 +209,30 @@ function deleteFromCart(id) {
   saveLS(cartItems);
   renderNumberOfCartItems();
   addCartItemsToWebpage();
+}
+
+function sumTotalPrice() {
+  const initialValue = 0;
+  return getShoppingCartFromLS().reduce(
+    (previousValue, currentValue) => previousValue + currentValue.price,
+    initialValue
+  );
+}
+
+function renderTotalPrice() {
+  const totalPrice = document.createElement('span');
+  totalPrice.innerHTML = `Totalt pris: ${sumTotalPrice()} kr`;
+  return totalPrice;
+}
+
+function renderPurchaseButton() {
+  const purchaseBtn = document.createElement('button');
+  purchaseBtn.innerHTML = '<i class="fa-solid fa-check"></i> Slutför ditt köp';
+  purchaseBtn.classList.add('product-btn');
+  purchaseBtn.classList.add('add-btn');
+
+  purchaseBtn.addEventListener('click', () => {
+    alert('Ditt köp är slutfört');
+  });
+  return purchaseBtn;
 }
