@@ -48,8 +48,11 @@ function addCartItemsToWebpage() {
     createCartItems(product);
   });
 
-  cartSummary.appendChild(renderTotalPrice());
-  cartSummary.appendChild(renderPurchaseButton());
+  if (cart.length > 0) {
+    cartSummary.innerHTML = '';
+    cartSummary.appendChild(renderTotalPrice());
+    cartSummary.appendChild(renderPurchaseButton());
+  } else cartSummary.innerHTML = 'Din kundvagn är tom!';
 }
 
 function createProductElements(product) {
@@ -103,7 +106,6 @@ function createProductElements(product) {
 
 function addToCart(productId) {
   let shoppingCart = getShoppingCartFromLS() || [];
-  e;
 
   if (
     shoppingCart.some(
@@ -217,3 +219,33 @@ function renderPurchaseButton() {
   });
   return purchaseBtn;
 }
+
+/*function openModal() {
+  - Lägga till ett klassnamn "open" hanteras med CSS
+  - Spara ordern till localStorage
+  - Tömmer kundvagnen
+}
+*/
+
+/*function closeModel() {
+  - Ta bort klassnamn "open" hanteras med CSS
+  - Skickas tillbaka till startsidan
+}
+*/
+
+// KEY: order [
+//  [ + cart,]
+//   + Username,
+//   + Date,
+// ]
+
+// KEY: user [
+// {
+//    username: 'Therese',
+//    password: '12345',
+// },
+// {
+//   username: 'Johan',
+//   password: '12345'
+// }
+// ]
