@@ -25,7 +25,6 @@ function initCartSite() {
 
 /** Uses the loaded products data to create a visible product list on the website */
 function addProductsToWebpage() {
-  // Check your console to see that the products are stored in the listOfProducts varible.
   console.log(listOfProducts);
 
   listOfProducts.forEach(product => {
@@ -35,29 +34,22 @@ function addProductsToWebpage() {
   // Add your code here, remember to brake your code in to smaller function blocks
   // to reduce complexity and increase readability. Each function should have
   // an explainetory comment like the one for this function, see row 22.
-
-  // TODO: Remove the console.log and these comments when you've read them.
 }
 
 function addCartItemsToWebpage() {
   const cartContainer = document.getElementById('cartContainer');
   cartContainer.innerHTML = '';
 
-  cartContainer.innerHTML = `
-  <div class="cart-title-wrapper">
-    <i class="fa-solid fa-cart-shopping icon"></i>
-    <h1>Kundvagn</h1>
-  </div>`;
-  // Check your console to see that the products are stored in the listOfProducts varible.
+  const cartSummary = document.getElementById('cartSummary');
+
   const cart = getShoppingCartFromLS();
 
   cart.forEach(product => {
-    console.log(product);
     createCartItems(product);
   });
 
-  cartContainer.appendChild(renderTotalPrice());
-  cartContainer.appendChild(renderPurchaseButton());
+  cartSummary.appendChild(renderTotalPrice());
+  cartSummary.appendChild(renderPurchaseButton());
 }
 
 function createProductElements(product) {
@@ -95,14 +87,7 @@ function createProductElements(product) {
     addToCart(addToCartBtn.id);
   });
 
-  productWrapper.append(
-    productCard
-    // productTitle,
-    // productDescription,
-    // productImage,
-    // productPrice,
-    // addToCartBtn
-  );
+  productWrapper.append(productCard);
 
   productCard.append(
     productTitle,
@@ -116,8 +101,8 @@ function createProductElements(product) {
 }
 
 function addToCart(productId) {
-  //HÄMTA FRÅN LOCALSTORAGE
-  let shoppingCart = getShoppingCartFromLS() || []; //sättas i LocalStorage
+  let shoppingCart = getShoppingCartFromLS() || [];
+  e;
 
   if (
     shoppingCart.some(
@@ -137,7 +122,6 @@ function addToCart(productId) {
 
   saveLS(shoppingCart);
   renderNumberOfCartItems();
-  // Spara till localStorage
 }
 
 function renderNumberOfCartItems() {
@@ -160,10 +144,7 @@ function createCartItems(product) {
   const cartContainer = document.querySelector('#cartContainer');
 
   const productWrapper = document.createElement('article');
-  productWrapper.classList.add('product-wrapper');
-
-  const productCard = document.createElement('div');
-  productCard.classList.add('product-card');
+  productWrapper.classList.add('cart-wrapper');
 
   const productTitle = document.createElement('h2');
   productTitle.classList.add('product-title');
@@ -186,9 +167,7 @@ function createCartItems(product) {
     deleteFromCart(deleteFromCartBtn.id);
   });
 
-  productWrapper.append(productCard);
-
-  productCard.append(
+  productWrapper.append(
     productImage,
     productTitle,
     productPrice,
