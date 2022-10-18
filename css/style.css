@@ -101,6 +101,7 @@ main {
   border-radius: 5px;
   padding: 0.7rem 1.2rem;
   font-size: 1.15rem;
+  cursor: pointer;
 }
 
 .product-btn i {

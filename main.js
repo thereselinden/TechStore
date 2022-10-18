@@ -71,6 +71,7 @@ function createProductElements(product) {
 
   const productImage = document.createElement('img');
   productImage.src = `/assets/${product.image}`;
+  productImage.alt = product.title;
   productImage.classList.add('product-image');
 
   const productPrice = document.createElement('p');
@@ -152,6 +153,7 @@ function createCartItems(product) {
 
   const productImage = document.createElement('img');
   productImage.src = `/assets/${product.image}`;
+  productImage.alt = product.title;
   productImage.classList.add('product-image');
 
   const productPrice = document.createElement('p');
