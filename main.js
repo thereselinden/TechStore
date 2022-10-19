@@ -123,7 +123,7 @@ function addToCart(productId) {
     shoppingCart.push(productObj);
   }
 
-  saveLS(shoppingCart);
+  saveShoppingCartLS(shoppingCart);
   renderNumberOfCartItems();
 }
 
@@ -135,12 +135,20 @@ function renderNumberOfCartItems() {
   numberOfItemsInCart.innerHTML = productsInShoppingCart.length;
 }
 
-function saveLS(shoppingCart) {
+function saveShoppingCartLS(shoppingCart) {
   localStorage.setItem('cart', JSON.stringify(shoppingCart));
+}
+
+function saveOrdersLS(orders) {
+  localStorage.setItem('orders', JSON.stringify(orders));
 }
 
 function getShoppingCartFromLS() {
   return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function getOrdersFromLS() {
+  return JSON.parse(localStorage.getItem('orders')) || [];
 }
 
 function createCartItems(product) {
@@ -189,7 +197,7 @@ function deleteFromCart(id) {
 
   cartItems.splice(index, 1);
 
-  saveLS(cartItems);
+  saveShoppingCartLS(cartItems);
   renderNumberOfCartItems();
   addCartItemsToWebpage();
 }
@@ -216,7 +224,7 @@ function renderPurchaseButton() {
 
   purchaseBtn.addEventListener('click', () => {
     openModal();
-    //saveOrder();
+    createOrder();
     clearCart();
   });
   return purchaseBtn;
@@ -235,6 +243,27 @@ function closeModal() {
 
 function clearCart() {
   localStorage.removeItem('cart');
+}
+
+function createOrder() {
+  // Hämta cart från LS
+  const cart = getShoppingCartFromLS();
+  let orders = getOrdersFromLS();
+  const order = [
+    {
+      cart: cart,
+      username: 'Walid',
+      date: new Date(),
+      orderId: orders.length + 1,
+    },
+  ];
+  orders.push(order);
+  console.log('ORDERS', order);
+  saveOrdersLS(orders);
+
+  // Skapa order array, om den inte finns, med cart + order id + username + datum
+  // Om den finns pusha till befintlig order array
+  // Klona cart-key till orders-key i LS
 }
 
 // KEY: order [
