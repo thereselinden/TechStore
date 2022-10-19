@@ -215,23 +215,27 @@ function renderPurchaseButton() {
   purchaseBtn.classList.add('add-btn');
 
   purchaseBtn.addEventListener('click', () => {
-    alert('Ditt köp är slutfört');
+    openModal();
+    //saveOrder();
+    clearCart();
   });
   return purchaseBtn;
 }
 
-/*function openModal() {
-  - Lägga till ett klassnamn "open" hanteras med CSS
-  - Spara ordern till localStorage
-  - Tömmer kundvagnen
+function openModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'flex';
 }
-*/
 
-/*function closeModel() {
-  - Ta bort klassnamn "open" hanteras med CSS
-  - Skickas tillbaka till startsidan
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
+  window.location = 'index.html';
 }
-*/
+
+function clearCart() {
+  localStorage.removeItem('cart');
+}
 
 // KEY: order [
 //  [ + cart,]
