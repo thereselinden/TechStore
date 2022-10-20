@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/c01716c9b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/main.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body onload="initLoginSite()">
+    <header>
+      <a href="/index.html">
+        <h1>TechStore</h1>
+      </a>
+      <div>
+        <span id="numberOfItemsInCart">0</span>
+        <a href="/cart.html">
+          <i class="fa-solid fa-cart-shopping icon"></i>
+        </a>
+        <a href="/login.html">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </a>
+      </div>
+    </header>
+    <main>
+      <form action="" class="form" id="loginUserForm">
+        <h1>Logga in</h1>
+        <label for="loginUsername">Email</label>
+        <input type="email" name="login-username" id="loginUsername" required />
+
+        <label for="loginPassword">Lösenord</label>
+        <input
+          type="text"
+          name="login-password"
+          id="loginPassword"
+          required
+          minlength="2"
+        />
+
+        <button class="login-btn product-btn">Logga in</button>
+        <a href="#" id="formLink">Skapa konto</a>
+      </form>
+
+      <form action="" class="form" id="createUserForm">
+        <h1>Skapa konto</h1>
+        <label for="createUsername">Email</label>
+        <input
+          type="email"
+          name="create-username"
+          id="createUsername"
+          required
+        />
+
+        <label for="createPassword">Lösenord</label>
+        <input
+          type="text"
+          name="create-password"
+          id="createPassword"
+          required
+          minlength="2"
+        />
+
+        <button class="create-btn product-btn">Skapa konto</button>
+        <a href="#" id="formLink">Logga in</a>
+      </form>
+    </main>
+  </body>
+</html>

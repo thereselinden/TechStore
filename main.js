@@ -23,6 +23,40 @@ function initCartSite() {
   addCartItemsToWebpage();
 }
 
+function initLoginSite() {
+  const createUsername = document.querySelector('#createUsername');
+  const createPassword = document.querySelector('#createPassword');
+  const createBtn = document.querySelector('.create-btn');
+
+  const logInUsername = document.querySelector('#loginUsername');
+  const logInPassword = document.querySelector('#loginPassword');
+  const logInBtn = document.querySelector('.login-btn');
+
+  createBtn.addEventListener('click', () => {
+    if (createUsername.value === '' || createPassword.value === '') {
+      alert('Informationen får inte vara tom');
+    } else {
+      createUser(createUsername.value, createPassword.value);
+    }
+  });
+
+  logInBtn.addEventListener('click', () => {
+    if (logInUsername.value === '' || logInPassword.value === '') {
+      alert('Informationen får inte vara tom');
+    }
+
+    if (signInUser(logInUsername.value, logInPassword.value)) {
+      //slicka vidare till user.html
+      //byt icon till en profilicon
+    } else {
+      alert('Inloggning misslyckades');
+
+      signInFail(logInUsername.value, logInPassword.value);
+      // anropa signInFail() som visar felmeddeande baseratr på fel
+    }
+  });
+}
+
 /** Uses the loaded products data to create a visible product list on the website */
 function addProductsToWebpage() {
   console.log(listOfProducts);
@@ -143,12 +177,28 @@ function saveOrdersLS(orders) {
   localStorage.setItem('orders', JSON.stringify(orders));
 }
 
+function saveUsersLS(users) {
+  localStorage.setItem('users', JSON.stringify(users));
+}
+
+function setLoggedInUser(user) {
+  localStorage.setItem('loggedInUser', JSON.stringify(user));
+}
+
 function getShoppingCartFromLS() {
   return JSON.parse(localStorage.getItem('cart')) || [];
 }
 
 function getOrdersFromLS() {
   return JSON.parse(localStorage.getItem('orders')) || [];
+}
+
+function getUsersFromLS() {
+  return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function getLoggedInUser() {
+  return JSON.parse(localStorage.getItem('loggedInUser')) || '';
 }
 
 function createCartItems(product) {
@@ -265,6 +315,45 @@ function createOrder() {
   // Om den finns pusha till befintlig order array
   // Klona cart-key till orders-key i LS
 }
+
+function createUser(username, password) {
+  // Hämta users key från LS
+  const users = getUsersFromLS();
+
+  if (users.some(user => user.username === username)) {
+    alert('Användaren finns redan');
+    //visa något form av felmeddelande?
+    // Tömma input fält vid fel
+  } else {
+    users.push({ username: username, password: password });
+    saveUsersLS(users);
+    setLoggedInUser(username);
+    //skicka användaren till user.html
+  }
+}
+
+function signInUser(username, password) {
+  const users = getUsersFromLS();
+
+  if (
+    users.find(user => user.username === username && user.password === password)
+  ) {
+    setLoggedInUser(username);
+    return true;
+  } else return false;
+}
+
+function signInFail() {
+  const users = getUsersFromLS();
+
+  if (
+    users.find(user => user.username !== username || user.password !== password)
+  ) {
+    alert('felaktiga inloggningsuppgifter');
+  }
+}
+
+function signOutUser() {}
 
 // KEY: order [
 //  [ + cart,]
