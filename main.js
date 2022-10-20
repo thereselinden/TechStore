@@ -32,20 +32,24 @@ function initLoginSite() {
   const logInPassword = document.querySelector('#loginPassword');
   const logInBtn = document.querySelector('.login-btn');
 
-  createBtn.addEventListener('click', () => {
+  createBtn.addEventListener('click', event => {
+    event.preventDefault();
     if (createUsername.value === '' || createPassword.value === '') {
       alert('Informationen får inte vara tom');
     } else {
       createUser(createUsername.value, createPassword.value);
+      renderHeaderLoginIcon();
     }
   });
 
-  logInBtn.addEventListener('click', () => {
+  logInBtn.addEventListener('click', event => {
+    event.preventDefault();
     if (logInUsername.value === '' || logInPassword.value === '') {
       alert('Informationen får inte vara tom');
     }
 
     if (signInUser(logInUsername.value, logInPassword.value)) {
+      renderHeaderLoginIcon();
       //slicka vidare till user.html
       //byt icon till en profilicon
     } else {
@@ -167,6 +171,19 @@ function renderNumberOfCartItems() {
 
   console.log(productsInShoppingCart);
   numberOfItemsInCart.innerHTML = productsInShoppingCart.length;
+}
+
+function renderHeaderLoginIcon() {
+  const loggedInUser = getLoggedInUser();
+  const isLoggedInIcon = document.getElementById('user-icon');
+
+  if (loggedInUser) {
+    isLoggedInIcon.innerHTML =
+      '<a href="/user.html"><i class="fa-solid fa-user"></i></a>';
+  } else {
+    isLoggedInIcon.innerHTML =
+      '<a href="/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>';
+  }
 }
 
 function saveShoppingCartLS(shoppingCart) {
@@ -354,6 +371,8 @@ function signInFail() {
 }
 
 function signOutUser() {}
+
+renderHeaderLoginIcon();
 
 // KEY: order [
 //  [ + cart,]
