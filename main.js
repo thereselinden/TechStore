@@ -32,6 +32,8 @@ function initLoginSite() {
   const logInPassword = document.querySelector('#loginPassword');
   const logInBtn = document.querySelector('.login-btn');
 
+  toggleLoginCreateForm();
+
   createBtn.addEventListener('click', event => {
     event.preventDefault();
     if (createUsername.value === '' || createPassword.value === '') {
@@ -50,8 +52,6 @@ function initLoginSite() {
 
     if (signInUser(logInUsername.value, logInPassword.value)) {
       renderHeaderLoginIcon();
-      //slicka vidare till user.html
-      //byt icon till en profilicon
     } else {
       alert('Inloggning misslyckades');
 
@@ -370,8 +370,30 @@ function signInFail() {
   }
 }
 
+function toggleLoginCreateForm() {
+  const createAccountLink = document.getElementById('createAccountLink');
+  const loginAccountLink = document.getElementById('loginAccountLink');
+
+  createAccountLink.addEventListener('click', () => {
+    const loginForm = document.getElementById('loginUserForm');
+    const createForm = document.getElementById('createUserForm');
+
+    loginForm.style.display = 'none';
+    createForm.style.display = 'flex';
+  });
+
+  loginAccountLink.addEventListener('click', () => {
+    const createForm = document.getElementById('createUserForm');
+    const loginForm = document.getElementById('loginUserForm');
+
+    createForm.style.display = 'none';
+    loginForm.style.display = 'flex';
+  });
+}
+
 function signOutUser() {}
 
+// BEHÖVER VI ANDROPA DENNA FUNKTIONEN HÄR?
 renderHeaderLoginIcon();
 
 // KEY: order [

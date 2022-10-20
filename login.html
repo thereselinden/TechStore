@@ -25,46 +25,56 @@
         <span id="user-icon"></span>
       </div>
     </header>
-    <main>
-      <form action="" class="form" id="loginUserForm">
+    <main class="login-container">
+      <form action="" class="form login-form" id="loginUserForm">
         <h1>Logga in</h1>
-        <label for="loginUsername">Email</label>
-        <input type="email" name="login-username" id="loginUsername" required />
-
-        <label for="loginPassword">Lösenord</label>
-        <input
-          type="text"
-          name="login-password"
-          id="loginPassword"
-          required
-          minlength="2"
-        />
-
+        <div class="input-container">
+          <label for="loginUsername">Email</label>
+          <input
+            type="email"
+            name="login-username"
+            id="loginUsername"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <label for="loginPassword">Lösenord</label>
+          <input
+            type="text"
+            name="login-password"
+            id="loginPassword"
+            required
+            minlength="2"
+          />
+        </div>
         <button class="login-btn product-btn">Logga in</button>
-        <a href="#" id="formLink">Skapa konto</a>
+        <a id="createAccountLink" class="formLink">Skapa konto</a>
       </form>
 
-      <form action="" class="form" id="createUserForm">
+      <form action="" class="form create-form" id="createUserForm">
         <h1>Skapa konto</h1>
-        <label for="createUsername">Email</label>
-        <input
-          type="email"
-          name="create-username"
-          id="createUsername"
-          required
-        />
-
-        <label for="createPassword">Lösenord</label>
-        <input
-          type="text"
-          name="create-password"
-          id="createPassword"
-          required
-          minlength="2"
-        />
+        <div class="input-container">
+          <label for="createUsername">Email</label>
+          <input
+            type="email"
+            name="create-username"
+            id="createUsername"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <label for="createPassword">Lösenord</label>
+          <input
+            type="text"
+            name="create-password"
+            id="createPassword"
+            required
+            minlength="2"
+          />
+        </div>
 
         <button class="create-btn product-btn">Skapa konto</button>
-        <a href="#" id="formLink">Logga in</a>
+        <a id="loginAccountLink" class="formLink">Logga in</a>
       </form>
     </main>
   </body>
