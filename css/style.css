@@ -43,8 +43,7 @@ header a,
   text-decoration: none;
 }
 
-header h1,
-.icon {
+header a {
   color: var(--white);
 }
 
