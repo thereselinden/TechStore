@@ -302,7 +302,7 @@ function createOrder() {
   const order = [
     {
       cart: cart,
-      username: 'Walid',
+      username: getLoggedInUser() || -1,
       date: new Date(),
       orderId: orders.length + 1,
     },
