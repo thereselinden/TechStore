@@ -209,12 +209,57 @@ main {
 }
 
 /**** LOGIN / CREATE ****/
-
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  height: 40vh;
+  width: 80%;
+  max-width: 350px;
+  margin-top: 10rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+  background: var(--lightGrey);
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.login-btn,
+.create-btn {
+  background-color: var(--blue);
+  width: 100%;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+.formLink {
+  color: var(--darkest);
+  margin-top: 10px;
+  text-decoration: underline;
+}
+
+.create-form {
+  display: none;
 }
 
 /**** MEDIA QUERIES TABLET ****/
