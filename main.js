@@ -316,14 +316,13 @@ function createOrder() {
   // Hämta cart från LS
   const cart = getShoppingCartFromLS();
   let orders = getOrdersFromLS();
-  const order = [
-    {
-      cart: cart,
-      username: getLoggedInUser() || -1,
-      date: new Date(),
-      orderId: orders.length + 1,
-    },
-  ];
+  const order = {
+    cart: cart,
+    username: getLoggedInUser() || -1,
+    date: new Date(),
+    orderId: orders.length + 1,
+  };
+
   orders.push(order);
   console.log('ORDERS', order);
   saveOrdersLS(orders);
@@ -391,7 +390,54 @@ function toggleLoginCreateForm() {
   });
 }
 
-function signOutUser() {}
+function getUserOrders() {
+  const orders = getOrdersFromLS();
+  const user = getLoggedInUser();
+  // console.log('ORDERS', orders);
+  // console.log('USER', user);
+
+  return orders.filter(order => order.username === user);
+}
+//getUserOrders();
+
+function renderUserOrders() {
+  const userOrders = getUserOrders();
+  const orderInformation = document.getElementById('orderInformation');
+
+  userOrders.forEach(order => {
+    const orderCart = order.cart.map(item => item);
+    console.log('OrderCart', orderCart);
+
+    ///console.log(orderCartTitle);
+
+    orderInformation.innerHTML += `
+    <p>Order id: ${order.orderId}</p> 
+    <time>Datum: ${order.date}</time>
+    <ul>`;
+
+    orderCart.forEach(item => {
+      //console.log(item.title);
+      orderInformation.innerHTML += `<li>Produktnamn: ${item.title} ${item.price}</li>`;
+    });
+
+    orderInformation.innerHTML += `</ul>`;
+
+    /*   orderInformation.innerHTML += `
+    <p>Order id: ${order.orderId}</p> 
+    <time>Datum: ${order.date}</time>
+    <ul>
+    <li>Produktnamn: ${orderCartTitle}</li>
+    </ul>`; */
+    //console.log('orderDate', order.date);
+    // console.log(
+    //   'cart',
+    //   order.cart.map(item => item.title)
+    // );
+  });
+}
+renderUserOrders();
+
+//function signOutUser() {}
 
 // BEHÖVER VI ANDROPA DENNA FUNKTIONEN HÄR?
 renderHeaderLoginIcon();
