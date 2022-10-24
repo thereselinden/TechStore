@@ -43,9 +43,14 @@ function initLoginSite() {
     event.preventDefault();
     if (createUsername.value === '' || createPassword.value === '') {
       alert('Informationen får inte vara tom');
+    } else if (doesUserExist(createUsername.value)) {
+      alert('Användare finns redan');
+      createUsername.value = '';
+      createPassword.value = '';
     } else {
       createUser(createUsername.value, createPassword.value);
-      renderHeaderLoginIcon();
+      window.location = 'user.html';
+      //renderHeaderLoginIcon();
     }
   });
 
@@ -56,7 +61,8 @@ function initLoginSite() {
     }
 
     if (signInUser(logInUsername.value, logInPassword.value)) {
-      renderHeaderLoginIcon();
+      window.location = 'user.html';
+      //renderHeaderLoginIcon();
     } else {
       alert('Inloggning misslyckades');
 
@@ -67,8 +73,15 @@ function initLoginSite() {
 }
 
 function initUserSite() {
+  document.querySelector('.signout-btn').addEventListener('click', function () {
+    signOutUser();
+    window.location = 'index.html';
+  });
+
   renderHeaderLoginIcon();
   renderNumberOfCartItems();
+  renderUserInfo();
+  renderUserOrders();
 }
 
 /** Uses the loaded products data to create a visible product list on the website */
@@ -342,20 +355,32 @@ function createOrder() {
   // Klona cart-key till orders-key i LS
 }
 
+function doesUserExist(username) {
+  const users = getUsersFromLS();
+
+  if (users.some(user => user.username === username)) {
+    return true;
+    //visa något form av felmeddelande?
+    // Tömma input fält vid fel
+  } else {
+    return false;
+  }
+}
+
 function createUser(username, password) {
   // Hämta users key från LS
   const users = getUsersFromLS();
 
-  if (users.some(user => user.username === username)) {
-    alert('Användaren finns redan');
-    //visa något form av felmeddelande?
-    // Tömma input fält vid fel
-  } else {
-    users.push({ username: username, password: password });
-    saveUsersLS(users);
-    setLoggedInUser(username);
-    //skicka användaren till user.html
-  }
+  // if (users.some(user => user.username === username)) {
+  //   alert('Användaren finns redan');
+  //   //visa något form av felmeddelande?
+  //   // Tömma input fält vid fel
+  // } else {
+
+  users.push({ username: username, password: password });
+  saveUsersLS(users);
+  setLoggedInUser(username);
+  //}
 }
 
 function signInUser(username, password) {
@@ -436,9 +461,20 @@ function renderUserOrders() {
     orderInformation.innerHTML += orderText;
   });
 }
-renderUserOrders();
 
-//function signOutUser() {}
+function renderUserInfo() {
+  const user = getLoggedInUser();
+  const userGreeting = document.getElementById('user-greeting');
+  if (user) {
+    userGreeting.innerHTML = `Hej, ${user}!`;
+  } else {
+    userGreeting.innerHTML = `Du är inte inloggad`;
+  }
+}
+
+function signOutUser() {
+  localStorage.removeItem('loggedInUser');
+}
 
 // BEHÖVER VI ANDROPA DENNA FUNKTIONEN HÄR?
 //renderHeaderLoginIcon();
