@@ -15,12 +15,15 @@ function loadProducts() {
 function initSite() {
   loadProducts();
   renderNumberOfCartItems();
+  renderHeaderLoginIcon();
+
   // This would also be a good place to initialize other parts of the UI
 }
 
 function initCartSite() {
   renderNumberOfCartItems();
   addCartItemsToWebpage();
+  renderHeaderLoginIcon();
 }
 
 function initLoginSite() {
@@ -32,6 +35,8 @@ function initLoginSite() {
   const logInPassword = document.querySelector('#loginPassword');
   const logInBtn = document.querySelector('.login-btn');
 
+  renderHeaderLoginIcon();
+  renderNumberOfCartItems();
   toggleLoginCreateForm();
 
   createBtn.addEventListener('click', event => {
@@ -59,6 +64,11 @@ function initLoginSite() {
       // anropa signInFail() som visar felmeddeande baseratr på fel
     }
   });
+}
+
+function initUserSite() {
+  renderHeaderLoginIcon();
+  renderNumberOfCartItems();
 }
 
 /** Uses the loaded products data to create a visible product list on the website */
@@ -405,34 +415,25 @@ function renderUserOrders() {
   const orderInformation = document.getElementById('orderInformation');
 
   userOrders.forEach(order => {
-    const orderCart = order.cart.map(item => item);
-    console.log('OrderCart', orderCart);
+    const orderDate = new Date(order.date);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const newDate = orderDate.toLocaleDateString('sv-SE', options);
+    let totalPrice = 0;
 
-    ///console.log(orderCartTitle);
-
-    orderInformation.innerHTML += `
+    let orderText = `
     <p>Order id: ${order.orderId}</p> 
-    <time>Datum: ${order.date}</time>
+    <time>Datum: ${newDate}</time>
     <ul>`;
 
-    orderCart.forEach(item => {
-      //console.log(item.title);
-      orderInformation.innerHTML += `<li>Produktnamn: ${item.title} ${item.price}</li>`;
+    order.cart.forEach(item => {
+      orderText += `<li>${item.title} ${item.price} kr</li>`;
+      totalPrice += item.price * 1; // item.qty
     });
 
-    orderInformation.innerHTML += `</ul>`;
-
-    /*   orderInformation.innerHTML += `
-    <p>Order id: ${order.orderId}</p> 
-    <time>Datum: ${order.date}</time>
-    <ul>
-    <li>Produktnamn: ${orderCartTitle}</li>
-    </ul>`; */
-    //console.log('orderDate', order.date);
-    // console.log(
-    //   'cart',
-    //   order.cart.map(item => item.title)
-    // );
+    orderText += `</ul>`;
+    orderText += `<p>Totalsumma: ${totalPrice} kr</p>`;
+    console.log('totalprice: ', totalPrice);
+    orderInformation.innerHTML += orderText;
   });
 }
 renderUserOrders();
@@ -440,7 +441,7 @@ renderUserOrders();
 //function signOutUser() {}
 
 // BEHÖVER VI ANDROPA DENNA FUNKTIONEN HÄR?
-renderHeaderLoginIcon();
+//renderHeaderLoginIcon();
 
 // KEY: order [
 //  [ + cart,]
