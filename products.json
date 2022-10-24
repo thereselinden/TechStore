@@ -1,23 +1,62 @@
 [
-    {
-        "title": "iPhone X",
-        "description": "Last years phone from Apple with a beautiful all display front.",
-        "image": "iPhoneX.png",
-        "price": 11495
-    },{
-        "title": "One Plus 5",
-        "description": "Sleek and powerful smartphone from One Plus.",
-        "image": "OnePlus5.png",
-        "price": 4995
-    },{
-        "title": "Galaxy S8",
-        "description": "Really cool edge to edge smartphone from Samsung.",
-        "image": "SamsungS8.png",
-        "price": 7990
-    },{
-        "title": "LG V30",
-        "description": "Super nice and beautiful smartphone from LG.",
-        "image": "LGV30.png",
-        "price": 7495
-    }
+  {
+    "title": "iPhone X",
+    "description": "Last years phone from Apple with a beautiful all display front.",
+    "image": "iPhoneX.png",
+    "price": 11495
+  },
+  {
+    "title": "One Plus 5",
+    "description": "Sleek and powerful smartphone from One Plus.",
+    "image": "OnePlus5.png",
+    "price": 4995
+  },
+  {
+    "title": "Galaxy S8",
+    "description": "Really cool edge to edge smartphone from Samsung.",
+    "image": "SamsungS8.png",
+    "price": 7990
+  },
+  {
+    "title": "LG V30",
+    "description": "Super nice and beautiful smartphone from LG.",
+    "image": "LGV30.png",
+    "price": 7495
+  },
+  {
+    "title": "Iphone 14",
+    "description": "Super nice and beautiful",
+    "image": "iPhoneX.png",
+    "price": 14995
+  },
+  {
+    "title": "Iphone 14PRO",
+    "description": "Super nice and beautiful",
+    "image": "iPhoneX.png",
+    "price": 16995
+  },
+  {
+    "title": "Nokia 3310",
+    "description": "Super nice and beautiful, go offline!",
+    "image": "iPhoneX.png",
+    "price": 295
+  },
+  {
+    "title": "Galaxy s23",
+    "description": "Super nice and beautiful",
+    "image": "LGV30.png",
+    "price": 11995
+  },
+  {
+    "title": "One Plus 10",
+    "description": "Super nice and beautiful",
+    "image": "LGV30.png",
+    "price": 9490
+  },
+  {
+    "title": "Ericson P28",
+    "description": "Super nice and beautiful",
+    "image": "iPhoneX.png",
+    "price": 1990
+  }
 ]
