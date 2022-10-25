@@ -39,6 +39,7 @@
     <main class="login-container">
       <form action="" class="form login-form" id="loginUserForm">
         <h1>Logga in</h1>
+        <div class="error-msg" id="errorMsgLogin">FEL</div>
         <div class="input-container">
           <label for="loginUsername">Email</label>
           <input
@@ -51,7 +52,7 @@
         <div class="input-container">
           <label for="loginPassword">Lösenord</label>
           <input
-            type="text"
+            type="password"
             name="login-password"
             id="loginPassword"
             required
@@ -64,6 +65,7 @@
 
       <form action="" class="form create-form" id="createUserForm">
         <h1>Skapa konto</h1>
+        <div class="error-msg" id="errorMsgCreate">FEL</div>
         <div class="input-container">
           <label for="createUsername">Email</label>
           <input

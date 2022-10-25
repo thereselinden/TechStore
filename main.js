@@ -42,9 +42,9 @@ function initLoginSite() {
   createBtn.addEventListener('click', event => {
     event.preventDefault();
     if (createUsername.value === '' || createPassword.value === '') {
-      alert('Informationen får inte vara tom');
+      showErrorMsg('Informationen får inte vara tom', 'create');
     } else if (doesUserExist(createUsername.value)) {
-      alert('Användare finns redan');
+      showErrorMsg('Användare finns redan', 'create');
       createUsername.value = '';
       createPassword.value = '';
     } else {
@@ -57,17 +57,16 @@ function initLoginSite() {
   logInBtn.addEventListener('click', event => {
     event.preventDefault();
     if (logInUsername.value === '' || logInPassword.value === '') {
-      alert('Informationen får inte vara tom');
-    }
-
-    if (signInUser(logInUsername.value, logInPassword.value)) {
-      window.location = 'user.html';
-      //renderHeaderLoginIcon();
+      showErrorMsg('Informationen får inte vara tom', 'login');
     } else {
-      alert('Inloggning misslyckades');
-
-      signInFail(logInUsername.value, logInPassword.value);
-      // anropa signInFail() som visar felmeddeande baseratr på fel
+      if (signInUser(logInUsername.value, logInPassword.value)) {
+        window.location = 'user.html';
+        //renderHeaderLoginIcon();
+      } else {
+        showErrorMsg('Inloggning misslyckades', 'login');
+        logInUsername.value = '';
+        logInPassword.value = '';
+      }
     }
   });
 }
@@ -420,19 +419,27 @@ function signInUser(username, password) {
   } else return false;
 }
 
-function signInFail() {
-  const users = getUsersFromLS();
+function showErrorMsg(message, target) {
+  const errorMsgLogin = document.getElementById('errorMsgLogin');
+  const errorMsgCreate = document.getElementById('errorMsgCreate');
 
-  if (
-    users.find(user => user.username !== username || user.password !== password)
-  ) {
-    alert('felaktiga inloggningsuppgifter');
+  if (target === 'create') {
+    console.log(errorMsgCreate);
+    errorMsgCreate.innerHTML = message;
+    errorMsgCreate.style.display = 'block';
+  } else {
+    errorMsgLogin.innerHTML = message;
+    errorMsgLogin.style.display = 'block';
   }
 }
 
 function toggleLoginCreateForm() {
+  //Clear errorMsg when toggle between login/create form
   const createAccountLink = document.getElementById('createAccountLink');
   const loginAccountLink = document.getElementById('loginAccountLink');
+
+  let errorMsgLogin = document.getElementById('errorMsgLogin');
+  let errorMsgCreate = document.getElementById('errorMsgCreate');
 
   createAccountLink.addEventListener('click', () => {
     const loginForm = document.getElementById('loginUserForm');
@@ -440,6 +447,7 @@ function toggleLoginCreateForm() {
 
     loginForm.style.display = 'none';
     createForm.style.display = 'flex';
+    errorMsgLogin.innerHTML = '';
   });
 
   loginAccountLink.addEventListener('click', () => {
@@ -448,6 +456,7 @@ function toggleLoginCreateForm() {
 
     createForm.style.display = 'none';
     loginForm.style.display = 'flex';
+    errorMsgCreate.innerHTML = '';
   });
 }
 
@@ -516,6 +525,9 @@ function renderUserInfo() {
   }
 }
 
+/*Ska vi hantera att vi tömmer varukorg om jag loggar ut och sen in? 
+Just nu om test1 loggar in, lägger varor i korg och loggar ut 
+test2 loggar in och ser då varukorgen som test1 påbörjat. */
 function signOutUser() {
   localStorage.removeItem('loggedInUser');
 }
