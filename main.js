@@ -143,13 +143,28 @@ function createProductElements(product) {
   productPrice.innerHTML = `${product.price} kr`;
 
   const addToCartBtn = document.createElement('button');
-  addToCartBtn.innerHTML =
-    '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen';
+  /*   addToCartBtn.innerHTML =
+    '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen'; */
   addToCartBtn.classList.add('btn');
   addToCartBtn.classList.add('add-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
+
+  if (
+    getShoppingCartFromLS().some(
+      productcart =>
+        productcart.title.replace(/\s+/g, '') ===
+        product.title.replace(/\s+/g, '')
+    )
+  ) {
+    disableBtn(addToCartBtn, 'Produkt tillagd');
+  } else {
+    addToCartBtn.innerHTML =
+      '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen';
+  }
+
   addToCartBtn.addEventListener('click', () => {
     addToCart(addToCartBtn.id);
+    disableBtn(addToCartBtn, 'Produkt tillagd');
   });
 
   productWrapper.append(productCard);
@@ -165,24 +180,36 @@ function createProductElements(product) {
   productContainer.appendChild(productWrapper);
 }
 
+function disableBtn(button, message) {
+  button.setAttribute('disabled', true);
+  button.classList.add('disabled-btn');
+  button.innerHTML = message;
+}
+
 function addToCart(productId) {
   let shoppingCart = getShoppingCartFromLS();
 
   if (
-    shoppingCart.some(
+    !shoppingCart.some(
       product => product.title.replace(/\s+/g, '') === productId
     )
   ) {
-    alert('Produkten redan tillagd');
-    //ändras när vi har kommit längre. T ex rendera ut + och 1 på varukorgssidan för att minska eller öka antalet produkter
-    // Om produkten redan finns - öka antalet ananrs lägg till.
-  } else {
     let productObj = listOfProducts.find(
       product => product.title.replace(/\s+/g, '') == productId
     );
 
     shoppingCart.push(productObj);
+    //alert('Produkten redan tillagd');
+    //ändras när vi har kommit längre. T ex rendera ut + och 1 på varukorgssidan för att minska eller öka antalet produkter
+    // Om produkten redan finns - öka antalet ananrs lägg till.
   }
+  // else {
+  //   let productObj = listOfProducts.find(
+  //     product => product.title.replace(/\s+/g, '') == productId
+  //   );
+
+  //   shoppingCart.push(productObj);
+  // }
 
   saveShoppingCartLS(shoppingCart);
   renderNumberOfCartItems();
