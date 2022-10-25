@@ -12,20 +12,21 @@ function loadProducts() {
     });
 }
 
+/* Called when index.html is loaded */
 function initSite() {
   loadProducts();
   renderNumberOfCartItems();
   renderHeaderLoginIcon();
-
-  // This would also be a good place to initialize other parts of the UI
 }
 
+/* Called when cart.html is loaded */
 function initCartSite() {
   renderNumberOfCartItems();
   addCartItemsToWebpage();
   renderHeaderLoginIcon();
 }
 
+/* Called when login.html is loaded */
 function initLoginSite() {
   const createUsername = document.querySelector('#createUsername');
   const createPassword = document.querySelector('#createPassword');
@@ -50,7 +51,6 @@ function initLoginSite() {
     } else {
       createUser(createUsername.value, createPassword.value);
       window.location = 'user.html';
-      //renderHeaderLoginIcon();
     }
   });
 
@@ -61,7 +61,6 @@ function initLoginSite() {
     } else {
       if (signInUser(logInUsername.value, logInPassword.value)) {
         window.location = 'user.html';
-        //renderHeaderLoginIcon();
       } else {
         showErrorMsg('Inloggning misslyckades', 'login');
         logInUsername.value = '';
@@ -71,6 +70,7 @@ function initLoginSite() {
   });
 }
 
+/* Called when user.html is loaded */
 function initUserSite() {
   document.querySelector('.signout-btn').addEventListener('click', function () {
     signOutUser();
@@ -85,36 +85,12 @@ function initUserSite() {
 
 /** Uses the loaded products data to create a visible product list on the website */
 function addProductsToWebpage() {
-  console.log(listOfProducts);
-
   listOfProducts.forEach(product => {
     createProductElements(product);
   });
-
-  // Add your code here, remember to brake your code in to smaller function blocks
-  // to reduce complexity and increase readability. Each function should have
-  // an explainetory comment like the one for this function, see row 22.
 }
 
-function addCartItemsToWebpage() {
-  const cartContainer = document.getElementById('cartContainer');
-  cartContainer.innerHTML = '';
-
-  const cartSummary = document.getElementById('cartSummary');
-
-  const cart = getShoppingCartFromLS();
-
-  cart.forEach(product => {
-    createCartItems(product);
-  });
-
-  if (cart.length > 0) {
-    cartSummary.innerHTML = '';
-    cartSummary.appendChild(renderTotalPrice());
-    cartSummary.appendChild(renderPurchaseButton());
-  } else cartSummary.innerHTML = 'Din kundvagn är tom!';
-}
-
+/* Create single product elements  */
 function createProductElements(product) {
   const productContainer = document.querySelector('#productContainer');
 
@@ -142,12 +118,11 @@ function createProductElements(product) {
   productPrice.innerHTML = `${product.price} kr`;
 
   const addToCartBtn = document.createElement('button');
-  /*   addToCartBtn.innerHTML =
-    '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen'; */
   addToCartBtn.classList.add('btn');
   addToCartBtn.classList.add('add-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
 
+  //Checks if product already in cart if so disable add button
   if (
     getShoppingCartFromLS().some(
       productcart =>
@@ -179,94 +154,26 @@ function createProductElements(product) {
   productContainer.appendChild(productWrapper);
 }
 
-function disableBtn(button, message) {
-  button.setAttribute('disabled', true);
-  button.classList.add('disabled-btn');
-  button.innerHTML = message;
+/* Renders shoppingcart page elements */
+function addCartItemsToWebpage() {
+  const cartContainer = document.getElementById('cartContainer');
+  cartContainer.innerHTML = '';
+
+  const cartSummary = document.getElementById('cartSummary');
+  const cart = getShoppingCartFromLS();
+
+  cart.forEach(product => {
+    createCartItems(product);
+  });
+
+  if (cart.length > 0) {
+    cartSummary.innerHTML = '';
+    cartSummary.appendChild(renderTotalPrice());
+    cartSummary.appendChild(renderPurchaseButton());
+  } else cartSummary.innerHTML = 'Din kundvagn är tom!';
 }
 
-function addToCart(productId) {
-  let shoppingCart = getShoppingCartFromLS();
-
-  if (
-    !shoppingCart.some(
-      product => product.title.replace(/\s+/g, '') === productId
-    )
-  ) {
-    let productObj = listOfProducts.find(
-      product => product.title.replace(/\s+/g, '') == productId
-    );
-
-    shoppingCart.push(productObj);
-    //alert('Produkten redan tillagd');
-    //ändras när vi har kommit längre. T ex rendera ut + och 1 på varukorgssidan för att minska eller öka antalet produkter
-    // Om produkten redan finns - öka antalet ananrs lägg till.
-  }
-  // else {
-  //   let productObj = listOfProducts.find(
-  //     product => product.title.replace(/\s+/g, '') == productId
-  //   );
-
-  //   shoppingCart.push(productObj);
-  // }
-
-  saveShoppingCartLS(shoppingCart);
-  renderNumberOfCartItems();
-}
-
-function renderNumberOfCartItems() {
-  const numberOfItemsInCart = document.querySelector('#numberOfItemsInCart');
-  const productsInShoppingCart = getShoppingCartFromLS();
-
-  console.log(productsInShoppingCart);
-  numberOfItemsInCart.innerHTML = productsInShoppingCart.length;
-}
-
-function renderHeaderLoginIcon() {
-  const loggedInUser = getLoggedInUser();
-  const isLoggedInIcon = document.getElementById('user-icon');
-
-  if (loggedInUser) {
-    isLoggedInIcon.innerHTML =
-      '<a href="/user.html"><i class="fa-solid fa-user"></i></a>';
-  } else {
-    isLoggedInIcon.innerHTML =
-      '<a href="/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>';
-  }
-}
-
-function saveShoppingCartLS(shoppingCart) {
-  localStorage.setItem('cart', JSON.stringify(shoppingCart));
-}
-
-function saveOrdersLS(orders) {
-  localStorage.setItem('orders', JSON.stringify(orders));
-}
-
-function saveUsersLS(users) {
-  localStorage.setItem('users', JSON.stringify(users));
-}
-
-function setLoggedInUser(user) {
-  localStorage.setItem('loggedInUser', JSON.stringify(user));
-}
-
-function getShoppingCartFromLS() {
-  return JSON.parse(localStorage.getItem('cart')) || [];
-}
-
-function getOrdersFromLS() {
-  return JSON.parse(localStorage.getItem('orders')) || [];
-}
-
-function getUsersFromLS() {
-  return JSON.parse(localStorage.getItem('users')) || [];
-}
-
-function getLoggedInUser() {
-  return JSON.parse(localStorage.getItem('loggedInUser')) || '';
-}
-
+/* Create single cart elements */
 function createCartItems(product) {
   const cartContainer = document.querySelector('#cartContainer');
 
@@ -305,6 +212,96 @@ function createCartItems(product) {
   cartContainer.appendChild(productWrapper);
 }
 
+/* Disable buttons */
+function disableBtn(button, message) {
+  button.setAttribute('disabled', true);
+  button.classList.add('disabled-btn');
+  button.innerHTML = message;
+}
+
+/* Add product to cart if not already added */
+function addToCart(productId) {
+  let shoppingCart = getShoppingCartFromLS();
+
+  if (
+    !shoppingCart.some(
+      product => product.title.replace(/\s+/g, '') === productId
+    )
+  ) {
+    let productObj = listOfProducts.find(
+      product => product.title.replace(/\s+/g, '') == productId
+    );
+
+    shoppingCart.push(productObj);
+  }
+
+  saveShoppingCartLS(shoppingCart);
+  renderNumberOfCartItems();
+}
+
+/* Render numbers of cart elements in header */
+function renderNumberOfCartItems() {
+  const numberOfItemsInCart = document.querySelector('#numberOfItemsInCart');
+  const productsInShoppingCart = getShoppingCartFromLS();
+
+  numberOfItemsInCart.innerHTML = productsInShoppingCart.length;
+}
+
+/* Change header icon based on signed in or not */
+function renderHeaderLoginIcon() {
+  const loggedInUser = getLoggedInUser();
+  const isLoggedInIcon = document.getElementById('user-icon');
+
+  if (loggedInUser) {
+    isLoggedInIcon.innerHTML =
+      '<a href="/user.html"><i class="fa-solid fa-user"></i></a>';
+  } else {
+    isLoggedInIcon.innerHTML =
+      '<a href="/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>';
+  }
+}
+
+/* Save cart to LocalStorage */
+function saveShoppingCartLS(shoppingCart) {
+  localStorage.setItem('cart', JSON.stringify(shoppingCart));
+}
+
+/* Save orders to LocalStorage */
+function saveOrdersLS(orders) {
+  localStorage.setItem('orders', JSON.stringify(orders));
+}
+
+/* Save users to LocalStorage */
+function saveUsersLS(users) {
+  localStorage.setItem('users', JSON.stringify(users));
+}
+
+/* Save loggedIn user in LocalStorage */
+function setLoggedInUser(user) {
+  localStorage.setItem('loggedInUser', JSON.stringify(user));
+}
+
+/* Get cart from LocalStorage */
+function getShoppingCartFromLS() {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+/* Get orders from LocalStorage */
+function getOrdersFromLS() {
+  return JSON.parse(localStorage.getItem('orders')) || [];
+}
+
+/* Get users from LocalStorage */
+function getUsersFromLS() {
+  return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+/* Get loggedIn user from LocalStorage */
+function getLoggedInUser() {
+  return JSON.parse(localStorage.getItem('loggedInUser')) || '';
+}
+
+/* Remove product from shoppingcart and update LS accordingly */
 function deleteFromCart(id) {
   let cartItems = getShoppingCartFromLS();
   const index = cartItems.findIndex(
@@ -318,6 +315,7 @@ function deleteFromCart(id) {
   addCartItemsToWebpage();
 }
 
+/* Calcuclates total price of shoppingcart */
 function sumTotalPrice() {
   const initialValue = 0;
   return getShoppingCartFromLS().reduce(
@@ -326,12 +324,14 @@ function sumTotalPrice() {
   );
 }
 
+/* Render total price of shoppingcart */
 function renderTotalPrice() {
   const totalPrice = document.createElement('span');
   totalPrice.innerHTML = `Totalt pris: ${sumTotalPrice()} kr`;
   return totalPrice;
 }
 
+/* Creates and render submit purchase button on cart.html */
 function renderPurchaseButton() {
   const purchaseBtn = document.createElement('button');
   purchaseBtn.innerHTML = '<i class="fa-solid fa-check"></i> Slutför ditt köp';
@@ -346,21 +346,25 @@ function renderPurchaseButton() {
   return purchaseBtn;
 }
 
+/* Show pop up */
 function openModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'flex';
 }
 
+/* Close pop up */
 function closeModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'none';
   window.location = 'index.html';
 }
 
+/* Clear shoppingcart and removes cart key in LS */
 function clearCart() {
   localStorage.removeItem('cart');
 }
 
+/* Create and save order  */
 function createOrder() {
   const cart = getShoppingCartFromLS();
   let orders = getOrdersFromLS();
@@ -372,42 +376,30 @@ function createOrder() {
   };
 
   orders.push(order);
-  console.log('ORDERS', order);
   saveOrdersLS(orders);
-
-  // Skapa order array, om den inte finns, med cart + order id + username + datum
-  // Om den finns pusha till befintlig order array
-  // Klona cart-key till orders-key i LS
 }
 
+/* Check if users exist  */
 function doesUserExist(username) {
   const users = getUsersFromLS();
 
   if (users.some(user => user.username === username)) {
     return true;
-    //visa något form av felmeddelande?
-    // Tömma input fält vid fel
   } else {
     return false;
   }
 }
 
+/* Create and login user */
 function createUser(username, password) {
-  // Hämta users key från LS
   const users = getUsersFromLS();
-
-  // if (users.some(user => user.username === username)) {
-  //   alert('Användaren finns redan');
-  //   //visa något form av felmeddelande?
-  //   // Tömma input fält vid fel
-  // } else {
 
   users.push({ username: username, password: password });
   saveUsersLS(users);
   setLoggedInUser(username);
-  //}
 }
 
+/* Sign in if user input values are correct */
 function signInUser(username, password) {
   const users = getUsersFromLS();
 
@@ -419,12 +411,12 @@ function signInUser(username, password) {
   } else return false;
 }
 
+/* Display error message on login.html  */
 function showErrorMsg(message, target) {
   const errorMsgLogin = document.getElementById('errorMsgLogin');
   const errorMsgCreate = document.getElementById('errorMsgCreate');
 
   if (target === 'create') {
-    console.log(errorMsgCreate);
     errorMsgCreate.innerHTML = message;
     errorMsgCreate.style.display = 'block';
   } else {
@@ -433,8 +425,8 @@ function showErrorMsg(message, target) {
   }
 }
 
+/* Toggle login/create form on login.html, clear errormsg on toggle */
 function toggleLoginCreateForm() {
-  //Clear errorMsg when toggle between login/create form
   const createAccountLink = document.getElementById('createAccountLink');
   const loginAccountLink = document.getElementById('loginAccountLink');
 
@@ -460,16 +452,15 @@ function toggleLoginCreateForm() {
   });
 }
 
+/* Filter orders based on user */
 function getUserOrders() {
   const orders = getOrdersFromLS();
   const user = getLoggedInUser();
-  // console.log('ORDERS', orders);
-  // console.log('USER', user);
 
   return orders.filter(order => order.username === user);
 }
-//getUserOrders();
 
+/* Create elements and render user orders  */
 function renderUserOrders() {
   const userOrders = getUserOrders();
   const orderInformation = document.getElementById('orderInformation');
@@ -515,6 +506,7 @@ function renderUserOrders() {
   });
 }
 
+/* Render userinfo based on logged in or not */
 function renderUserInfo() {
   const user = getLoggedInUser();
   const userGreeting = document.getElementById('user-greeting');
@@ -525,9 +517,8 @@ function renderUserInfo() {
   }
 }
 
-/*Ska vi hantera att vi tömmer varukorg om jag loggar ut och sen in? 
-Just nu om test1 loggar in, lägger varor i korg och loggar ut 
-test2 loggar in och ser då varukorgen som test1 påbörjat. */
+/* Sign out user */
 function signOutUser() {
   localStorage.removeItem('loggedInUser');
+  localStorage.removeItem('cart');
 }
