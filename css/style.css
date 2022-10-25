@@ -272,6 +272,11 @@ input {
   cursor: pointer;
 }
 
+.error-msg {
+  display: none;
+  color: var(--red);
+}
+
 .create-form {
   display: none;
 }
