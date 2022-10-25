@@ -11,6 +11,8 @@
   --blue: cornflowerblue;
   --red: rgb(231, 77, 50);
   --background-opacity: rgba(0, 0, 0, 0.6);
+  --disabled-backround: rgb(239, 238, 238);
+  --disabled-font-color: rgb(215, 215, 215);
 }
 
 body {
@@ -121,6 +123,12 @@ main {
   background-color: var(--blue);
   width: 80%;
   margin-top: 1rem;
+}
+
+.disabled-btn {
+  background-color: var(--disabled-backround);
+  color: var(--disabled-font-color);
+  cursor: default;
 }
 
 /**** CART PAGE STYLING ****/
