@@ -145,7 +145,7 @@ function createProductElements(product) {
   const addToCartBtn = document.createElement('button');
   addToCartBtn.innerHTML =
     '<i class="fa-solid fa-cart-arrow-down"></i> Lägg till i kundvagnen';
-  addToCartBtn.classList.add('product-btn');
+  addToCartBtn.classList.add('btn');
   addToCartBtn.classList.add('add-btn');
   addToCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
   addToCartBtn.addEventListener('click', () => {
@@ -262,7 +262,7 @@ function createCartItems(product) {
 
   const deleteFromCartBtn = document.createElement('button');
   deleteFromCartBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Ta bort';
-  deleteFromCartBtn.classList.add('product-btn');
+  deleteFromCartBtn.classList.add('btn');
   deleteFromCartBtn.classList.add('remove-btn');
   deleteFromCartBtn.id = product.title.replace(/\s+/g, ''); //remove whitespace to match id when button clicked
   deleteFromCartBtn.addEventListener('click', () => {
@@ -309,7 +309,7 @@ function renderTotalPrice() {
 function renderPurchaseButton() {
   const purchaseBtn = document.createElement('button');
   purchaseBtn.innerHTML = '<i class="fa-solid fa-check"></i> Slutför ditt köp';
-  purchaseBtn.classList.add('product-btn');
+  purchaseBtn.classList.add('btn');
   purchaseBtn.classList.add('add-btn');
 
   purchaseBtn.addEventListener('click', () => {
@@ -336,7 +336,6 @@ function clearCart() {
 }
 
 function createOrder() {
-  // Hämta cart från LS
   const cart = getShoppingCartFromLS();
   let orders = getOrdersFromLS();
   const order = {
@@ -443,22 +442,40 @@ function renderUserOrders() {
     const orderDate = new Date(order.date);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const newDate = orderDate.toLocaleDateString('sv-SE', options);
+
     let totalPrice = 0;
 
-    let orderText = `
-    <p>Order id: ${order.orderId}</p> 
-    <time>Datum: ${newDate}</time>
-    <ul>`;
+    const orderWrapper = document.createElement('article');
+    orderWrapper.classList.add('order');
+
+    const orderId = document.createElement('p');
+    orderId.classList.add('order-id');
+    orderId.innerHTML = `<span>OrderId:</span> ${order.orderId}`;
+
+    const orderPurchaseDate = document.createElement('time');
+    orderPurchaseDate.classList.add('order-time');
+    orderPurchaseDate.innerHTML = `<span>Datum:</span> ${newDate}`;
+
+    const productListWrapper = document.createElement('ul');
+    productListWrapper.classList.add('order-product-list-wrapper');
+
+    orderWrapper.append(orderId, orderPurchaseDate, productListWrapper);
 
     order.cart.forEach(item => {
-      orderText += `<li>${item.title} ${item.price} kr</li>`;
-      totalPrice += item.price * 1; // item.qty
+      const listProducts = document.createElement('li');
+      listProducts.classList.add('order-product-list');
+      listProducts.innerHTML = item.title;
+      productListWrapper.append(listProducts);
+
+      totalPrice += item.price;
     });
 
-    orderText += `</ul>`;
-    orderText += `<p>Totalsumma: ${totalPrice} kr</p>`;
-    console.log('totalprice: ', totalPrice);
-    orderInformation.innerHTML += orderText;
+    const sumTotal = document.createElement('p');
+    sumTotal.classList.add('order-total-price');
+    sumTotal.innerHTML = `<span>Totalsumma:</span> ${totalPrice} kr`;
+
+    orderWrapper.append(sumTotal);
+    orderInformation.append(orderWrapper);
   });
 }
 
@@ -475,27 +492,3 @@ function renderUserInfo() {
 function signOutUser() {
   localStorage.removeItem('loggedInUser');
 }
-
-// BEHÖVER VI ANDROPA DENNA FUNKTIONEN HÄR?
-//renderHeaderLoginIcon();
-
-// KEY: order [
-//  [ + cart,]
-//   + Username,
-//   + Date,
-// ]
-
-// KEY: user [
-// {
-//    username: 'Therese',
-//    password: '12345',
-// },
-// {
-//   username: 'Johan',
-//   password: '12345'
-// },
-// {
-//   username: 'Walid',
-//   password: '123456'
-// }
-// ]

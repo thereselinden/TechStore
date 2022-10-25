@@ -58,6 +58,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 94vh; /*ADDED*/
 }
 
 .product-wrapper div {
@@ -95,7 +96,7 @@ main {
   margin: 0.8rem 0;
 }
 
-.product-btn {
+.btn {
   color: var(--white);
   border: 0;
   border-radius: 5px;
@@ -104,7 +105,7 @@ main {
   cursor: pointer;
 }
 
-.product-btn i {
+.btn i {
   margin-right: 8px;
   font-size: 0.9rem;
 }
@@ -147,6 +148,7 @@ main {
   background-color: var(--lightGrey);
   margin: 5px;
   padding: 0.7rem;
+  width: 45%; /*ADDED*/
 }
 
 .cart-wrapper img {
@@ -263,6 +265,69 @@ input {
   display: none;
 }
 
+/**** USER ****/
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--lightGrey);
+  margin-bottom: 2rem;
+}
+
+.user-container h2 {
+  margin-top: 2rem;
+}
+
+.signout-btn {
+  background-color: var(--blue);
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+.order-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-container h2 {
+  margin-bottom: 1rem;
+}
+
+#orderInformation {
+  width: 100%;
+}
+
+#orderInformation article {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.order:nth-child(odd) {
+  background-color: var(--lightGrey);
+}
+
+#orderInformation span {
+  font-weight: bold;
+}
+
+#orderInformation ul {
+  list-style: none;
+}
+
 /**** MEDIA QUERIES TABLET ****/
 @media (min-width: 768px) {
   header {
@@ -275,11 +340,22 @@ input {
     height: 20rem;
     margin: 0;
   }
+  .cart-page .cart-wrapper {
+    width: 22%;
+  }
+
   .cart-wrapper img {
-    height: 250px;
+    height: 200px;
   }
   #modal-container {
     width: 40%;
+  }
+  #orderInformation article {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
   }
 }
 
@@ -291,5 +367,9 @@ input {
   .product-card .product-image {
     height: 23rem;
     margin: 0;
+  }
+
+  .cart-page .cart-wrapper {
+    width: 21%;
   }
 }
