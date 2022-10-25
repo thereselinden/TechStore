@@ -29,6 +29,7 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 6vh;
+  min-height: 70px;
   width: 100%;
   background-color: var(--darkest);
   padding: 0 1rem;
@@ -60,7 +61,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 94vh; /*ADDED*/
+  height: 94vh;
+  min-height: 650px;
 }
 
 .product-wrapper div {
@@ -156,11 +158,12 @@ main {
   background-color: var(--lightGrey);
   margin: 5px;
   padding: 0.7rem;
-  width: 45%; /*ADDED*/
+  width: 163px;
 }
 
 .cart-wrapper img {
-  height: 200px;
+  /* height: 200px; */
+  height: 170px;
 }
 
 .cart-wrapper button {
@@ -345,11 +348,11 @@ input {
     margin-top: 8vh;
   }
   .product-card .product-image {
-    height: 20rem;
     margin: 0;
   }
+
   .cart-page .cart-wrapper {
-    width: 22%;
+    width: unset;
   }
 
   .cart-wrapper img {
@@ -373,11 +376,7 @@ input {
     padding: 4rem;
   }
   .product-card .product-image {
-    height: 23rem;
+    height: 26rem;
     margin: 0;
-  }
-
-  .cart-page .cart-wrapper {
-    width: 21%;
   }
 }
