@@ -476,21 +476,6 @@ function renderUserOrders() {
 
     orderWrapper.append(sumTotal);
     orderInformation.append(orderWrapper);
-
-    //   orderText = `
-    //   <p>Order id: ${order.orderId}</p>
-    //   <time>Datum: ${newDate}</time>
-    //   <ul>`;
-
-    //   order.cart.forEach(item => {
-    //     orderText += `<li>${item.title} ${item.price} kr</li>`;
-    //     totalPrice += item.price * 1; // item.qty
-    //   });
-
-    //   orderText += `</ul>`;
-    //   orderText += `<p>Totalsumma: ${totalPrice} kr</p>`;
-    //   console.log('totalprice: ', totalPrice);
-    //   orderInformation.innerHTML += orderText;
   });
 }
 

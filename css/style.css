@@ -58,7 +58,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 90vh; /*ADDED*/
+  height: 94vh; /*ADDED*/
 }
 
 .product-wrapper div {
@@ -148,6 +148,7 @@ main {
   background-color: var(--lightGrey);
   margin: 5px;
   padding: 0.7rem;
+  width: 45%; /*ADDED*/
 }
 
 .cart-wrapper img {
@@ -339,8 +340,12 @@ input {
     height: 20rem;
     margin: 0;
   }
+  .cart-page .cart-wrapper {
+    width: 22%;
+  }
+
   .cart-wrapper img {
-    height: 250px;
+    height: 200px;
   }
   #modal-container {
     width: 40%;
@@ -362,5 +367,9 @@ input {
   .product-card .product-image {
     height: 23rem;
     margin: 0;
+  }
+
+  .cart-page .cart-wrapper {
+    width: 21%;
   }
 }
