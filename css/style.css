@@ -50,7 +50,56 @@ header a {
   color: var(--white);
 }
 
-/**** MAIN START PAGE ****/
+/**** BUTTON ****/
+.btn {
+  color: var(--white);
+  border: 0;
+  border-radius: 5px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.btn i {
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+.add-btn {
+  background-color: var(--blue);
+}
+
+.remove-btn {
+  background-color: var(--red);
+}
+
+.confirm-btn {
+  background-color: var(--blue);
+  width: 80%;
+  margin-top: 1rem;
+}
+
+.disabled-btn {
+  background-color: var(--disabled-backround);
+  color: var(--disabled-font-color);
+  cursor: default;
+}
+
+.login-btn,
+.create-btn {
+  background-color: var(--blue);
+  width: 100%;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+.signout-btn {
+  background-color: var(--blue);
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+/**** START PAGE ****/
 main {
   margin-top: 6vh;
   width: 100%;
@@ -100,39 +149,6 @@ main {
   margin: 0.8rem 0;
 }
 
-.btn {
-  color: var(--white);
-  border: 0;
-  border-radius: 5px;
-  padding: 0.7rem 1.2rem;
-  font-size: 1.15rem;
-  cursor: pointer;
-}
-
-.btn i {
-  margin-right: 8px;
-  font-size: 0.9rem;
-}
-.add-btn {
-  background-color: var(--blue);
-}
-
-.remove-btn {
-  background-color: var(--red);
-}
-
-.confirm-btn {
-  background-color: var(--blue);
-  width: 80%;
-  margin-top: 1rem;
-}
-
-.disabled-btn {
-  background-color: var(--disabled-backround);
-  color: var(--disabled-font-color);
-  cursor: default;
-}
-
 /**** CART PAGE STYLING ****/
 .cart-page {
   display: flex;
@@ -162,7 +178,6 @@ main {
 }
 
 .cart-wrapper img {
-  /* height: 200px; */
   height: 170px;
 }
 
@@ -227,6 +242,7 @@ main {
   flex-direction: column;
   align-items: center;
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -257,14 +273,6 @@ input {
   font-size: 1rem;
 }
 
-.login-btn,
-.create-btn {
-  background-color: var(--blue);
-  width: 100%;
-  margin-top: 1.5rem;
-  cursor: pointer;
-}
-
 .formLink {
   color: var(--darkest);
   margin-top: 10px;
@@ -281,7 +289,7 @@ input {
   display: none;
 }
 
-/**** USER ****/
+/**** USER PAGE ****/
 .user {
   display: flex;
   flex-direction: column;
@@ -301,13 +309,6 @@ input {
 
 .user-container h2 {
   margin-top: 2rem;
-}
-
-.signout-btn {
-  background-color: var(--blue);
-  margin: 1rem 0;
-  width: 100%;
-  max-width: 300px;
 }
 
 .order-container {
