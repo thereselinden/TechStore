@@ -184,7 +184,6 @@ main {
   background-color: var(--lightGrey);
   margin: 8px;
   padding: 0.5rem;
-  /*width: 163px;*/
 }
 
 .cart-wrapper img {
@@ -359,18 +358,18 @@ input {
 /**** MEDIA QUERIES TABLET ****/
 @media (min-width: 768px) {
   header h1 {
-    font-size: 2rem;  
+    font-size: 2rem;
   }
 
   header {
     height: 9.5vh;
     font-size: 2rem;
     padding: 0 1.5rem;
-  } 
+  }
 
   header a,
   i {
-  font-size: 1.7rem;
+    font-size: 1.7rem;
   }
 
   main {
@@ -386,7 +385,7 @@ input {
   }
 
   .product-card .product-description {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
   }
 
   .product-card .product-price {
@@ -436,7 +435,7 @@ input {
     padding: 0.4rem 1rem;
     font-size: 0.9rem;
   }
-  
+
   .remove-btn i {
     font-size: 0.8rem;
   }
@@ -457,17 +456,17 @@ input {
 /**** MEDIA QUERIES DESKTOP ****/
 @media (min-width: 1024px) {
   header h1 {
-    font-size: 2.5rem;  
+    font-size: 2.5rem;
   }
 
   header {
     font-size: 2.5rem;
     padding: 0 2rem;
-  } 
+  }
 
   header a,
   i {
-  font-size: 2rem;
+    font-size: 2rem;
   }
 
   .product-card h2 {
@@ -475,7 +474,7 @@ input {
   }
 
   .product-card .product-description {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 
   .product-card .product-price {
