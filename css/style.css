@@ -28,8 +28,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 6vh;
-  min-height: 70px;
+  height: 8vh;
+  min-height: 50px;
   width: 100%;
   background-color: var(--darkest);
   padding: 0 1rem;
@@ -38,12 +38,13 @@ header {
 }
 
 header h1 {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
 }
 
 header a,
-.icon {
+i {
   text-decoration: none;
+  font-size: 1.4rem;
 }
 
 header a {
@@ -54,9 +55,9 @@ header a {
 .btn {
   color: var(--white);
   border: 0;
-  border-radius: 5px;
-  padding: 0.7rem 1.2rem;
-  font-size: 1.15rem;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -64,12 +65,20 @@ header a {
   margin-right: 8px;
   font-size: 0.9rem;
 }
+
 .add-btn {
   background-color: var(--blue);
 }
 
 .remove-btn {
   background-color: var(--red);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.7rem;
+}
+
+.remove-btn i {
+  margin-right: 8px;
+  font-size: 0.6rem;
 }
 
 .confirm-btn {
@@ -101,7 +110,7 @@ header a {
 
 /**** START PAGE ****/
 main {
-  margin-top: 6vh;
+  margin-top: 8vh;
   width: 100%;
 }
 
@@ -110,8 +119,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 94vh;
-  min-height: 650px;
+  height: 92vh;
+  min-height: 600px;
 }
 
 .product-wrapper div {
@@ -136,6 +145,7 @@ main {
 
 .product-card .product-price {
   margin-bottom: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .product-card .product-description {
@@ -144,9 +154,9 @@ main {
 }
 
 .product-card .product-image {
-  height: 21rem;
+  height: 52vh;
   width: auto;
-  margin: 0.8rem 0;
+  margin: 0.6rem 0 0 0;
 }
 
 /**** CART PAGE STYLING ****/
@@ -172,23 +182,23 @@ main {
   border: 2px solid var(--blue);
   border-radius: 10px;
   background-color: var(--lightGrey);
-  margin: 5px;
-  padding: 0.7rem;
-  width: 163px;
+  margin: 8px;
+  padding: 0.5rem;
+  /*width: 163px;*/
 }
 
 .cart-wrapper img {
-  height: 170px;
+  height: 128px;
 }
 
 .cart-wrapper button {
   margin: 0 0.5rem;
-  border-radius: 10px;
 }
 
 .cart-wrapper .product-price {
+  font-size: 0.6rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .cart-title {
@@ -200,7 +210,7 @@ main {
 }
 
 #cartSummary {
-  margin-top: 1rem;
+  margin: 1rem 0 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -347,14 +357,48 @@ input {
 
 /**** MEDIA QUERIES TABLET ****/
 @media (min-width: 768px) {
-  header {
-    height: 8vh;
+  header h1 {
+    font-size: 2rem;  
   }
+
+  header {
+    height: 9.5vh;
+    font-size: 2rem;
+    padding: 0 1.5rem;
+  } 
+
+  header a,
+  i {
+  font-size: 1.7rem;
+  }
+
   main {
     margin-top: 8vh;
   }
+
   .product-card .product-image {
     margin: 0;
+  }
+
+  .product-card h2 {
+    font-size: 2.5rem;
+  }
+
+  .product-card .product-description {
+      font-size: 0.8rem;
+  }
+
+  .product-card .product-price {
+    font-size: 1.1rem;
+  }
+
+  .cart-title {
+    font-size: 2.4rem;
+  }
+
+  .cart-title i {
+    font-size: 1.9rem;
+    margin: 2rem 0 0 0;
   }
 
   .cart-page .cart-wrapper {
@@ -362,11 +406,44 @@ input {
   }
 
   .cart-wrapper img {
-    height: 200px;
+    height: 137px;
   }
+
+  .cart-wrapper .product-title {
+    font-size: 1.8rem;
+  }
+
+  .cart-wrapper .product-price {
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+  }
+
+  #cartSummary span {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .btn i {
+    font-size: 1.1rem;
+  }
+
+  .remove-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .remove-btn i {
+    font-size: 0.8rem;
+  }
+
   #modal-container {
     width: 40%;
   }
+
   #orderInformation article {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -378,11 +455,78 @@ input {
 
 /**** MEDIA QUERIES DESKTOP ****/
 @media (min-width: 1024px) {
-  .product-wrapper {
-    padding: 4rem;
+  header h1 {
+    font-size: 2.5rem;  
   }
-  .product-card .product-image {
-    height: 26rem;
-    margin: 0;
+
+  header {
+    font-size: 2.5rem;
+    padding: 0 2rem;
+  } 
+
+  header a,
+  i {
+  font-size: 2rem;
+  }
+
+  .product-card h2 {
+    font-size: 3rem;
+  }
+
+  .product-card .product-description {
+      font-size: 1rem;
+  }
+
+  .product-card .product-price {
+    font-size: 1.3rem;
+  }
+
+  .cart-title {
+    font-size: 3rem;
+    margin: 2.5rem 0;
+  }
+
+  .cart-title i {
+    font-size: 2.4rem;
+  }
+
+  .cart-page .cart-wrapper {
+    padding: 0.7rem 0.5rem;
+  }
+
+  .cart-wrapper img {
+    height: 170px;
+  }
+
+  .cart-wrapper .product-title {
+    font-size: 2rem;
+  }
+
+  .cart-wrapper .product-price {
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+  }
+
+  #cartSummary span {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+  }
+
+  .btn i {
+    margin-right: 8px;
+    font-size: 1.3rem;
+  }
+
+  .remove-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .remove-btn i {
+    font-size: 0.9rem;
   }
 }
