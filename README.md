@@ -1,3 +1,3 @@
 # TechStore
 
-added something
+Alla krav uppfyllda!
