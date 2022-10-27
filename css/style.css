@@ -335,6 +335,7 @@ input {
 
 #orderInformation {
   width: 100%;
+  max-width: 900px;
 }
 
 #orderInformation article {
