@@ -6,7 +6,7 @@ Uppgiften var att skapa en enkel e-handelssida med utseende baserat på givna mo
 
 Länk till repo på GitHub: https://github.com/thereselinden/TechStore
 
-Länk till hemsidan på 
+Länk till hemsidan på Netlify: https://techstore-group4.netlify.app/
 
 ## Krav på uppgift
 
