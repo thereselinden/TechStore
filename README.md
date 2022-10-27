@@ -5,6 +5,7 @@
 Uppgiften var att skapa en enkel e-handelssida med utseende baserat på givna mockup-bilder. Produkterna skulle renderas från en json-fil med  färdig produktinformation.
 
 Länk till repo på GitHub: https://github.com/thereselinden/TechStore
+
 Länk till hemsidan på 
 
 ## Krav på uppgift
