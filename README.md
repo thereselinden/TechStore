@@ -47,7 +47,8 @@ Vi satsade på att genomföra alla krav för VG. Nedan listar vi alla krav vi up
 - När man bekräftar ett köp töms kundvagnen.
 - Vi har gjort en login-sida där man kan skapa ett konto samt logga in, och en användarsida där användaren kan se alla beställningar som gjorts.
 
-#### Motivering VG-krav och förbättringar
+### Motivering VG-krav och förbättringar
+
 - Beställningar sparas i LocalStorage. När en order skapas sparas produkterna från kundvagnen tillsammans med order-id, användarnamn och datum. Användarnamnet sätts till inloggad användare, om inte inloggad sätts värdet till -1. Då kan vi senare filtrera beställningarna på specifika användare eller beställningar utan kopplad användare. 
 - Användare sparas i en lista LocalStorage. Inloggad användare skapas som ett värde i LocalStorage som töms vid utloggning.
 - Vi har gjort en egen sida för att visa en inloggad användares beställningar. Här filtreras alla beställningar efter den inloggade användaren. Vi har valt att inte visa produktbilderna här för att hålla orderinformationen kort och koncis. Användaren kan även logga ut genom att klicka på knapp.
